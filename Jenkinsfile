@@ -3,9 +3,13 @@ pipeline {
   stages {
     stage('bubuli') {
       steps {
-        sh '''echo \'Installing bundles..\'
+        sh '''#!/bin/bash -l
+
+echo \'Installing bundles..\'
 bundle install'''
-        sh '''echo \'Building..\'
+        sh '''#!/bin/bash -l
+
+echo \'Building..\'
 bundle exec jekyll build'''
         git(url: 'github.com/mstiesto/mstiesto.github.io', branch: 'gh-pages', changelog: true)
       }
