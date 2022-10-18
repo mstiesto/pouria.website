@@ -1,18 +1,35 @@
 pipeline {
-   agent any
+    agent any
 
-   stages {
-      stage('Gem Installation') {
-         steps {
-            echo 'Updating Gemfiles...'
-            sh 'BUNDLE_GEMFILE=Gemfile bundle install --deployment --clean'
-         }
-      }
-      stage('Build and Deploy Jekyll') {
-         steps {
-            echo 'Building and deploying'
-            sh 'bundle exec jekyll build -d /www/ajfite.com/projects/tractorhacking/'
-         }
-      }
-   }
+    stages {
+
+		stage('Install Bundles') {
+            steps {
+                echo 'Installing bundles..'
+sh 'bundle install --path ~/.gem'
+            }
+        }
+        stage('Building site') {
+            steps {
+                echo 'Building..'
+sh 'bundle exec jekyll build'
+            }
+        }
+        stage('Deploy') {
+			when {
+                branch 'develop'
+            }
+            steps {
+                echo 'Deploying to dev....'
+sh 'rsync -avzh ./_site/ /var/www/jekyll-dev/
+            }
+			
+			when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
 }
