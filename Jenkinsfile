@@ -17,15 +17,15 @@ sh 'bundle exec jekyll build'
         }
         stage('Deploy') {
 			when {
-                branch 'develop'
+                branch 'dev'
             }
             steps {
                 echo 'Deploying to dev....'
-sh 'rsync -avzh ./_site/ /var/www/jekyll-dev/
+sh 'git add ./build && git push origin -u gh-pages
             }
 			
 			when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 echo 'Deploying....'
