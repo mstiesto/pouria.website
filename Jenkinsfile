@@ -1,8 +1,7 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage('build') {
-      agent any
       environment {
         name = 'jekyll'
       }
