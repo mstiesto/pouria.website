@@ -8,9 +8,6 @@ pipeline {
   stages {
     stage('Build') {
       agent any
-      environment {
-        Label = 'jenkins-agent'
-      }
       steps {
         sh '''echo \'Installing bundles..\'
 bundle install'''
@@ -20,6 +17,7 @@ bundle exec jekyll build'''
     }
 
     stage('Deploy') {
+      agent any
       steps {
         git(url: 'github.com/mstiesto/mstiesto.github.io', branch: 'gh-pages', changelog: true)
       }
