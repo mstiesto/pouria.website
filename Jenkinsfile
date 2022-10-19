@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '''echo installing...
-bundle install'''
+        sh 'echo installing...'
       }
     }
 
