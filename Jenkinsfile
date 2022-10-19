@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       agent {
         node {
-          label 'Ruby'
+          label 'jenkins-agent'
         }
 
       }
