@@ -5,7 +5,7 @@ pipeline {
       agent any
       steps {
         sh '''echo installing...
-bundell install'''
+jekyll build'''
       }
     }
 
