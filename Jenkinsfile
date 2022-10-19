@@ -7,11 +7,9 @@ pipeline {
   }
   stages {
     stage('Build') {
-      agent {
-        node {
-          label 'jenkins-agent'
-        }
-
+      agent any
+      environment {
+        Label = 'jenkins-agent'
       }
       steps {
         sh '''echo \'Installing bundles..\'
