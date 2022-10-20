@@ -16,7 +16,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        git(url: 'github.com/mstiesto/mstiesto.github.io', branch: 'gh-pages', changelog: true)
+        git(url: 'https://github.com/mstiesto/mstiesto.github.io', branch: 'gh-pages', changelog: true)
       }
     }
 
