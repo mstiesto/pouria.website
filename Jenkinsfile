@@ -3,14 +3,14 @@ pipeline {
     docker {
       image 'jekyll/jekyll:3.8'
       args '''-u root:root
--v "${WORKSPACE}:/usr/local/bundle"'''
+-v "${WORKSPACE}:/srv/jekyll"'''
     }
 
   }
   stages {
     stage('Biuld') {
       steps {
-        sh 'jekyll build --trace --destination ./build'
+        sh 'jekyll build --destination ./build'
       }
     }
 
