@@ -11,7 +11,8 @@ pipeline {
     stage('Prepare') {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
-          sh 'echo Pulling gh-pages branch into _site directoy'
+          sh '''echo Pulling gh-pages branch into _site directoy
+rm -rf _site'''
           sh 'git clone -b gh-pages `git config remote.origin.url` _site'
         }
 
