@@ -28,6 +28,8 @@ pipeline {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
           sh 'cd ./_site'
+          sh '''git config --global user.email "mstiesto01@gmail.com"
+git config --global user.name "Jenkins-CI"'''
           sh 'git add -A'
           sh 'git commit -am "Jenkins-CI"'
           sh 'git push'
