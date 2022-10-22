@@ -12,6 +12,8 @@ pipeline {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
           sh '''rm -rf _site
+git config --global user.email "mstiesto@gmail.com"
+git config --global user.name "Jenkins-CI"
 git clone -b gh-pages `git config remote.origin.url` _site
 jekyll build --destination ./_site
 cd ./_site
