@@ -19,11 +19,11 @@ pipeline {
         sh '''git checkout -B gh-pages
 git config user.name \'Jenkis-CI\'
 git config user.email \'mstiesto01@gmail.com\'
-git add build/* && git commit -am "[Jenkins CI] Add build file"'''
+cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
       }
     }
 
-    stage('Push to Github Registry') {
+    stage('Push to Github') {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
           sh 'echo Jenkins-CI pushing '
