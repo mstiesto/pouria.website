@@ -19,13 +19,7 @@ rm -rf _site'''
       }
     }
 
-    stage('Build') {
-      steps {
-        sh 'jekyll build --destination ./_site'
-      }
-    }
-
-    stage('Push') {
+    stage('build') {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
           sh 'cd ./_site'
@@ -36,6 +30,7 @@ git config --global user.name "Jenkins-CI"'''
           sh 'git push'
         }
 
+        sh 'jekyll build --destination ./_site'
       }
     }
 
