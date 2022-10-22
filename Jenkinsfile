@@ -31,24 +31,5 @@ cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
         }            
       }  
     }
-    
-    
-    
-    
-    
-withCredentials([gitUsernamePassword(credentialsId: 'my-credentials-id', gitToolName: 'git-tool')]) {
-  sh 'git fetch --all'
-}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   }
 }
