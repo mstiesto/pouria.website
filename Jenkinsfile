@@ -18,11 +18,17 @@ git clone -b gh-pages `git config remote.origin.url` _site'''
         }
       }
     }
-    stage('Build/Push') {
+    stage('Build') {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
-          sh '''jekyll build --destination ./_site
-cd ./_site
+          sh '''jekyll build --destination ./_site'''
+        }
+      }
+    }
+    stage('Push') {
+      steps {
+        withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
+          sh '''cd ./_site
 git add -A
 git commit -am "Jenkins-CI"
 git push'''
