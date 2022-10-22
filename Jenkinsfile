@@ -27,8 +27,7 @@ cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
           sh 'echo Jenkins-CI pushing '
-          sh 'git config --global push.default simple'
-          sh 'git push https://mstiesto:${TOKEN}@github.com/mstiesto/mstiesto.github.io.git -u gh-pages'
+          sh 'git push origin -u gh-pages'
         }
 
       }
