@@ -17,8 +17,8 @@ pipeline {
     stage('Commit') {
       steps {
         sh '''git checkout -B gh-pages
-git config user.name \'JenkinsCI\'
-git config user.email \'jenkinsci@users.noreply.github.example.com\'
+git config user.name \'mstiesto\'
+git config user.email \'mstiesto01@gmail.com\'
 cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
       }
     }
@@ -30,8 +30,7 @@ cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
         GIT_AUTH_PSW = '123456'
       }
       steps {
-        sh '''git config --local credential.helper "!f() { echo username=\\\\$GIT_AUTH_USR; echo password=\\\\$GIT_AUTH_PSW; }; f"
-git push origin HEAD:gh-pages'''
+        sh 'git push origin -u gh-pages'
       }
     }
 
