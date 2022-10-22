@@ -14,10 +14,18 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Commit') {
       steps {
-        sh '''cd build && git add . && git commit -m "Update blog from Jenkins"
-git subtree push --prefix build origin gh-pages'''
+        sh '''                    git checkout -B gh-pages
+                    git config user.name \'JenkinsCI\'
+                    git config user.email \'jenkinsci@users.noreply.github.example.com\'
+                    cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
+      }
+    }
+
+    stage('Push') {
+      steps {
+        sh 'git push origin HEAD:gh-pages'
       }
     }
 
