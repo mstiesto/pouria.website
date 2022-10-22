@@ -5,6 +5,7 @@ pipeline {
       args '''-u root:root
 -v "${WORKSPACE}:/srv/jekyll"'''
     }
+
   }
   stages {
     stage('Biuld') {
@@ -21,15 +22,17 @@ git config user.email \'mstiesto01@gmail.com\'
 cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
       }
     }
-   
-    stage('Push to Github Registry'){
-        steps {
-            withCredentials([gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {                
-            sh 'echo Jenkins-CI pushing '
-            sh 'git config --global push.default simple'
-            sh('git push https://${TOKEN}@github.com/mstiesto/mstiesto.github.io.git -u gh-pages')            
-        }            
-      }  
+
+    stage('Push to Github Registry') {
+      steps {
+        withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
+          sh 'echo Jenkins-CI pushing '
+          sh 'git config --global push.default simple'
+          sh 'git push https://mstiesto:${TOKEN}@github.com/mstiesto/mstiesto.github.io.git -u gh-pages'
+        }
+
+      }
     }
+
   }
 }
