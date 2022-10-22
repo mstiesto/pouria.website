@@ -19,7 +19,7 @@ pipeline {
         sh '''git checkout -B gh-pages
 git config user.name \'Jenkis-CI\'
 git config user.email \'mstiesto01@gmail.com\'
-cd build && git add . && git commit -am "[Jenkins CI] Add build file"'''
+git add build/* && git commit -am "[Jenkins CI] Add build file"'''
       }
     }
 
