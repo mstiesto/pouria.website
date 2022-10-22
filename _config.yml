@@ -44,6 +44,7 @@ plugins:
 #
 exclude:
   - Jenkinsfile
+  
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
