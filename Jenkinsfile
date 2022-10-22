@@ -8,27 +8,16 @@ pipeline {
 
   }
   stages {
-    stage('Prepare') {
+    stage('Build/Push') {
       steps {
         withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
-          sh '''echo Pulling gh-pages branch into _site directoy
-rm -rf _site'''
-          sh 'git clone -b gh-pages `git config remote.origin.url` _site'
-        }
-
-      }
-    }
-
-    stage('build') {
-      steps {
-        withCredentials(bindings: [gitUsernamePassword(credentialsId: 'Jenkins', variable: 'TOKEN')]) {
-          sh 'jekyll build --destination ./_site'
-          sh 'cd ./_site'
-          sh '''git config --global user.email "mstiesto01@gmail.com"
-git config --global user.name "Jenkins-CI"'''
-          sh 'git add -A'
-          sh 'git commit -am "Jenkins-CI"'
-          sh 'git push'
+          sh '''rm -rf _site
+git clone -b gh-pages `git config remote.origin.url` _site
+jekyll build --destination ./_site
+cd ./_site
+git add -A
+git commit -am "Jenkins-CI"
+git push'''
         }
 
       }
